@@ -1,0 +1,91 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id              String            @id @default(uuid())
+  name            String
+  email           String            @unique
+  password        String
+  role            Role              @default(USER)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  papers          Paper[]
+  chatHistories   ChatHistory[]
+  comparisons     PaperComparison[]
+}
+
+model Paper {
+  id          String        @id @default(uuid())
+  title       String
+  authors     String[]
+  doi         String?
+  fileUrl     String
+  filePath    String
+  fileSize    Int
+  userId      String
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  summary     Summary?
+  citations   Citation[]
+  chatHistory ChatHistory[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Summary {
+  id              String   @id @default(uuid())
+  paperId         String   @unique
+  paper           Paper    @relation(fields: [paperId], references: [id], onDelete: Cascade)
+  executiveSummary String
+  problemStatement String
+  methodology     String
+  datasetUsed     String
+  results         String
+  limitations     String
+  futureWork      String
+  conclusion      String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Citation {
+  id        String   @id @default(uuid())
+  paperId   String
+  paper     Paper    @relation(fields: [paperId], references: [id], onDelete: Cascade)
+  text      String
+  context   String?
+  authors   String[]
+  year      Int?
+  createdAt DateTime @default(now())
+}
+
+model ChatHistory {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  paperId   String
+  paper     Paper    @relation(fields: [paperId], references: [id], onDelete: Cascade)
+  role      String   // "user" or "assistant"
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model PaperComparison {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name           String
+  paperIds       String[]
+  comparisonData Json     // JSON representation of comparison matrix
+  createdAt      DateTime @default(now())
+}

@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: rpa-postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgrespassword}
+      POSTGRES_DB: ${POSTGRES_DB:-paper_summarizer_db}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - rpa-network
+
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    container_name: rpa-ai-service
+    restart: always
+    ports:
+      - "${AI_PORT:-8000}:8000"
+    environment:
+      - PORT=8000
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - CHROMA_DB_DIR=/app/chromadb_storage
+      - EMBEDDINGS_MODEL_NAME=${EMBEDDINGS_MODEL_NAME:-all-MiniLM-L6-v2}
+    volumes:
+      - ./ai-service/chromadb_storage:/app/chromadb_storage
+      - ./uploads:/app/uploads
+    networks:
+      - rpa-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: rpa-nestjs-backend
+    restart: always
+    ports:
+      - "${BACKEND_PORT:-4000}:4000"
+    environment:
+      - PORT=4000
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgrespassword}@db:5432/${POSTGRES_DB:-paper_summarizer_db}?schema=public
+      - JWT_ACCESS_SECRET=${JWT_ACCESS_SECRET:-your_super_secret_jwt_access_key_12345!}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET:-your_super_secret_jwt_refresh_key_98765!}
+      - AI_SERVICE_URL=http://ai-service:8000
+      - UPLOAD_DIR=/app/uploads
+    depends_on:
+      - db
+      - ai-service
+    volumes:
+      - ./uploads:/app/uploads
+    networks:
+      - rpa-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: rpa-nextjs-frontend
+    restart: always
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - PORT=3000
+      - NEXT_PUBLIC_API_URL=http://localhost:${BACKEND_PORT:-4000}
+    depends_on:
+      - backend
+    networks:
+      - rpa-network
+
+volumes:
+  postgres_data:
+  uploads:
+
+networks:
+  rpa-network:
+    driver: bridge
