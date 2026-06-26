@@ -63,7 +63,7 @@ export default function RegisterPage() {
             <div style={{ width: 34, height: 34, borderRadius: 9, background: 'linear-gradient(135deg, #6366f1, #4f46e5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <BrainCircuit size={18} color="#fff" />
             </div>
-            <span style={{ fontWeight: 800, fontSize: 18, color: 'var(--text-primary)' }}>AuraPaper</span>
+            <span style={{ fontWeight: 800, fontSize: 18, color: 'var(--text-primary)' }}>DP Reseach Hub</span>
           </div>
 
           <h2 style={{ fontSize: 26, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.8px', lineHeight: 1.3, marginBottom: 12 }}>
@@ -94,7 +94,7 @@ export default function RegisterPage() {
             <div style={{ width: 36, height: 36, borderRadius: 10, background: 'linear-gradient(135deg, #6366f1, #4f46e5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <BrainCircuit size={20} color="#fff" />
             </div>
-            <span style={{ fontWeight: 800, fontSize: 20, color: 'var(--text-primary)' }}>AuraPaper</span>
+            <span style={{ fontWeight: 800, fontSize: 20, color: 'var(--text-primary)' }}>DP Research Hub</span>
           </div>
 
           <div style={{ marginBottom: 32 }}>

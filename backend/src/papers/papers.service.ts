@@ -21,7 +21,8 @@ export class PapersService {
     userId: string,
     file: Express.Multer.File,
   ): Promise<Paper> {
-    const uploadDir = this.configService.get<string>('UPLOAD_DIR', './uploads');
+    const configuredUploadDir = this.configService.get<string>('UPLOAD_DIR', './uploads');
+    const uploadDir = path.resolve(configuredUploadDir);
     
     // 1. Create a tentative database record to get a UUID
     const tentativePaper = await this.prisma.paper.create({
@@ -70,7 +71,7 @@ export class PapersService {
     // 4. Forward file to FastAPI service for parsing & RAG ingestion
     try {
       const formData = new FormData();
-      const fileBlob = new Blob([file.buffer], { type: 'application/pdf' });
+      const fileBlob = new Blob([new Uint8Array(file.buffer)], { type: 'application/pdf' });
       formData.append('file', fileBlob, file.originalname);
       formData.append('paper_id', paperId);
 

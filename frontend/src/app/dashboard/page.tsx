@@ -102,7 +102,7 @@ export default function DashboardPage() {
             <div style={{ width: 30, height: 30, borderRadius: 8, background: 'linear-gradient(135deg, #6366f1, #4f46e5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <BrainCircuit size={16} color="#fff" />
             </div>
-            <span style={{ fontWeight: 800, fontSize: 16, color: 'var(--text-primary)' }}>AuraPaper</span>
+            <span style={{ fontWeight: 800, fontSize: 16, color: 'var(--text-primary)' }}>DP Research Hub</span>
           </div>
 
           {/* Nav */}

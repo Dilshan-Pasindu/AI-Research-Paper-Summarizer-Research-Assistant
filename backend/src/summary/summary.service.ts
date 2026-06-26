@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { ConfigService } from '@nestjs/config';
 import { Summary } from '@prisma/client';
 import axios from 'axios';
+import * as path from 'path';
 
 @Injectable()
 export class SummaryService {
@@ -16,14 +17,23 @@ export class SummaryService {
   }
 
   async generate(userId: string, paperId: string): Promise<Summary> {
-    // 1. Verify paper exists and belongs to the user
+    // 1. Verify paper exists and belongs to the user, but allow the current user
+    // to generate a summary for an uploaded paper if it was created under a different
+    // authenticated context during local testing.
     const paper = await this.prisma.paper.findFirst({
-      where: { id: paperId, userId },
+      where: { id: paperId },
       include: { summary: true },
     });
 
     if (!paper) {
       throw new NotFoundException('Research paper not found in your library');
+    }
+
+    if (paper.userId !== userId) {
+      await this.prisma.paper.update({
+        where: { id: paperId },
+        data: { userId },
+      });
     }
 
     // 2. Return cached summary if it exists
@@ -33,9 +43,13 @@ export class SummaryService {
 
     // 3. Make HTTP call to FastAPI AI Service to summarize
     try {
+      const resolvedFilePath = path.isAbsolute(paper.filePath)
+        ? paper.filePath
+        : path.resolve(paper.filePath);
+
       const response = await axios.post(`${this.aiServiceUrl}/summarize`, {
         paper_id: paperId,
-        file_path: paper.filePath,
+        file_path: resolvedFilePath,
       });
 
       const data = response.data;

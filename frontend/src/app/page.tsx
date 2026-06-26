@@ -9,7 +9,7 @@ const features = [
     color: '#6366f1',
     bg: 'rgba(99,102,241,0.08)',
     title: 'Intelligent PDF Parsing',
-    desc: 'PyMuPDF extracts titles, authors, DOI, and metadata. Chunked with LangChain for high-precision retrieval.',
+    desc: 'PyMuPDF extracts titles, authors, DOI, and metadata, then organizes them for high-precision retrieval.',
   },
   {
     icon: MessageSquare,
@@ -89,7 +89,7 @@ export default function LandingPage() {
               <BrainCircuit size={18} color="#fff" />
             </div>
             <span style={{ fontWeight: 800, fontSize: 18, color: 'var(--text-primary)', letterSpacing: '-0.5px' }}>
-              AuraPaper
+              DP Research Hub
             </span>
           </div>
 
@@ -106,13 +106,6 @@ export default function LandingPage() {
 
         {/* ── HERO ───────────────────────────────── */}
         <section style={{ maxWidth: 1200, margin: '0 auto', padding: '96px 24px 80px', textAlign: 'center' }}>
-          <div className="animate-fade-in-up">
-            <div className="badge badge-indigo" style={{ marginBottom: 24, display: 'inline-flex' }}>
-              <Zap size={11} />
-              Powered by Google Gemini 1.5 Flash &nbsp;·&nbsp; LangChain RAG
-            </div>
-          </div>
-
           <h1 className="animate-fade-in-up delay-100 gradient-text" style={{
             fontSize: 'clamp(40px, 6vw, 72px)', fontWeight: 900,
             lineHeight: 1.1, letterSpacing: '-2px', marginBottom: 24,
@@ -131,9 +124,6 @@ export default function LandingPage() {
             <Link href="/register" className="btn-primary" style={{ height: 48, fontSize: 15, padding: '0 28px' }}>
               Start Analyzing Papers
               <ArrowRight size={16} />
-            </Link>
-            <Link href="/login" className="btn-secondary" style={{ height: 48, fontSize: 15, padding: '0 28px' }}>
-              View Demo Library
             </Link>
           </div>
 
@@ -197,7 +187,7 @@ export default function LandingPage() {
                 Ready to accelerate your research?
               </h2>
               <p style={{ color: 'var(--text-secondary)', fontSize: 16, marginBottom: 32 }}>
-                Join researchers who use AuraPaper to review literature faster.
+                Join researchers who use DP Reseach Hub to review literature faster.
               </p>
               <Link href="/register" className="btn-primary" style={{ height: 48, fontSize: 15, padding: '0 32px' }}>
                 Create Free Account
@@ -211,7 +201,7 @@ export default function LandingPage() {
       {/* ── FOOTER ─────────────────────────────── */}
       <footer style={{ borderTop: '1px solid var(--border)', padding: '24px', textAlign: 'center' }}>
         <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>
-          © {new Date().getFullYear()} AuraPaper · Built with Next.js 15, NestJS, FastAPI &amp; Google Gemini
+          © DP Research Hub. All rights reserved.
         </p>
       </footer>
     </div>

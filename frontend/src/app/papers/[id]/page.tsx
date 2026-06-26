@@ -104,6 +104,7 @@ export default function PaperDetailsPage() {
   );
 
   const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+  const pdfUrl = paper.fileUrl ? `${backendUrl}${paper.fileUrl}` : '';
 
   return (
     <div style={{ height: '100vh', background: 'var(--bg-primary)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
@@ -148,7 +149,7 @@ export default function PaperDetailsPage() {
           <div style={{ width: 26, height: 26, borderRadius: 7, background: 'linear-gradient(135deg, #6366f1, #4f46e5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <BrainCircuit size={14} color="#fff" />
           </div>
-          <span style={{ fontSize: 14, fontWeight: 800, color: 'var(--text-primary)' }}>AuraPaper</span>
+          <span style={{ fontSize: 14, fontWeight: 800, color: 'var(--text-primary)' }}>DP Research Hub</span>
         </div>
       </header>
 
@@ -293,10 +294,20 @@ export default function PaperDetailsPage() {
 
             {/* ── PDF VIEWER TAB ── */}
             {activeTab === 'pdf' && (
-              <div className="animate-fade-in" style={{ height: '100%', minHeight: 500 }}>
-                <iframe
-                  src={`${backendUrl}${paper.fileUrl}`}
-                  style={{ width: '100%', height: 'calc(100vh - 180px)', borderRadius: 10, border: '1px solid var(--border)', background: 'var(--bg-secondary)' }}
+              <div className="animate-fade-in" style={{ height: '100%', minHeight: 500, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <a
+                  href={pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary"
+                  style={{ alignSelf: 'flex-start', textDecoration: 'none' }}
+                >
+                  Open PDF in new tab
+                </a>
+                <embed
+                  src={pdfUrl}
+                  type="application/pdf"
+                  style={{ width: '100%', height: 'calc(100vh - 220px)', borderRadius: 10, border: '1px solid var(--border)', background: 'var(--bg-secondary)' }}
                   title="PDF Viewer"
                 />
               </div>

@@ -85,7 +85,7 @@ export default function ComparePage() {
           <div style={{ width: 26, height: 26, borderRadius: 7, background: 'linear-gradient(135deg, #6366f1, #4f46e5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <BrainCircuit size={14} color="#fff" />
           </div>
-          <span style={{ fontSize: 14, fontWeight: 800, color: 'var(--text-primary)' }}>AuraPaper</span>
+          <span style={{ fontSize: 14, fontWeight: 800, color: 'var(--text-primary)' }}>DP Reseach Hub</span>
         </div>
       </header>
 

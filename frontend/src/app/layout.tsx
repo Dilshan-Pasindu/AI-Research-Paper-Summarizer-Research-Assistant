@@ -10,10 +10,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AuraPaper — AI Research Paper Summarizer & Assistant",
+  title: "DP Reseach Hub — AI Research Paper Summarizer & Assistant",
   description:
-    "Upload research papers, extract structured AI summaries, chat with documents using RAG, and compare papers side-by-side. Powered by Google Gemini & LangChain.",
-  keywords: ["research paper", "AI summary", "RAG", "Gemini", "PDF", "academic"],
+    "Upload research papers, extract structured AI summaries, chat with documents using RAG, and compare papers side-by-side in one streamlined workspace.",
+  keywords: ["research paper", "AI summary", "RAG", "PDF", "academic"],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

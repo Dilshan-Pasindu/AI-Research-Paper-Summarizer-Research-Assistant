@@ -54,7 +54,7 @@ export default function LoginPage() {
           <div style={{ width: 34, height: 34, borderRadius: 9, background: 'linear-gradient(135deg, #6366f1, #4f46e5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <BrainCircuit size={18} color="#fff" />
           </div>
-          <span style={{ fontWeight: 800, fontSize: 18, color: 'var(--text-primary)' }}>AuraPaper</span>
+          <span style={{ fontWeight: 800, fontSize: 18, color: 'var(--text-primary)' }}>DP Research Hub</span>
         </div>
         <div>
           <p style={{ fontSize: 28, fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.3, marginBottom: 16 }}>
@@ -73,7 +73,7 @@ export default function LoginPage() {
             <div style={{ width: 36, height: 36, borderRadius: 10, background: 'linear-gradient(135deg, #6366f1, #4f46e5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <BrainCircuit size={20} color="#fff" />
             </div>
-            <span style={{ fontWeight: 800, fontSize: 20, color: 'var(--text-primary)' }}>AuraPaper</span>
+            <span style={{ fontWeight: 800, fontSize: 20, color: 'var(--text-primary)' }}>DP Research Hub</span>
           </div>
 
           <div style={{ marginBottom: 32 }}>
@@ -154,7 +154,7 @@ export default function LoginPage() {
           {/* Divider */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: '24px 0' }}>
             <div className="divider" style={{ flex: 1 }} />
-            <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 500 }}>New to AuraPaper?</span>
+            <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 500 }}>New to DP Reseach Hub?</span>
             <div className="divider" style={{ flex: 1 }} />
           </div>
 

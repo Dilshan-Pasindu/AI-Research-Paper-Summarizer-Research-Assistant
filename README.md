@@ -1,4 +1,4 @@
-# AuraPaper - AI Research Paper Summarizer & Research Assistant
+# DP Research Hub - AI Research Paper Summarizer & Research Assistant
 
 A complete production-ready SaaS application allowing users to upload research papers (PDF), extract text and metadata, generate structured AI summaries, query papers using RAG-based context chat, extract citation lists, and compare papers side-by-side.
 

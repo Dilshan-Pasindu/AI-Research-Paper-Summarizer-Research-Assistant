@@ -11,9 +11,8 @@ from app.prompts.comparison_prompt import COMPARISON_PROMPT_TEMPLATE
 
 class LLMService:
     def __init__(self):
-        # We use gemini-1.5-flash for faster responses
         self.llm = ChatGoogleGenerativeAI(
-            model="gemini-1.5-flash",
+            model=settings.GEMINI_MODEL_NAME,
             google_api_key=settings.GEMINI_API_KEY,
             temperature=0.2
         )
